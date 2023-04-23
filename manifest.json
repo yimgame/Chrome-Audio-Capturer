@@ -1,42 +1,38 @@
 {
-  "manifest_version": 2,
+  "manifest_version": 3,
 
-  "name": "Chrome Audio Capture mod Yim",
+  "name": "Chrome Audio Capture",
   "description": "This extension captures the audio on the current tab and saves the output file on your computer when the capture is complete",
   "version": "1.1.1",
   "icons": {
-    "128":"icon.png"
-    },
+    "128": "icon.png"
+  },
 
-  "browser_action": {
+  "action": {
     "default_icon": "icon.png",
     "default_popup": "popup.html",
-    "default_title": "Open Chrome Audio Capture interface mod Yim"
+    "default_title": "Open Chrome Audio Capture interface"
   },
-  "options_page": "options.html",
+  "options_ui": {
+    "page": "options.html",
+    "open_in_tab": true
+  },
   "background": {
-    "scripts": ["background.js", "worker.js"],
-    "persistent": true
+    "service_worker": "service-worker.js"
   },
+  "host_permissions": [
+    "activeTab"
+  ],
   "permissions": [
-    "tabCapture",
     "downloads",
     "storage"
   ],
   "commands": {
-    "start": {
+    "_execute_action": {
       "suggested_key": {
         "default": "Ctrl+Shift+S",
         "mac": "Command+Shift+U"
-      },
-      "description": "Start Capture"
-    },
-    "stop": {
-      "suggested_key": {
-        "default": "Ctrl+Shift+X",
-        "mac": "MacCtrl+Shift+X"
-      },
-      "description": "Stop Capture"
+      }
     }
   }
 }
