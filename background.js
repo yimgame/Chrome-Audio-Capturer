@@ -26,7 +26,7 @@ const CONFIGS = {
 
   // runtime options
   options: {
-    timeLimit: 1200,           // recording time limit (sec)
+    timeLimit: 1800,           // recording time limit (sec)
     encodeAfterRecord: true, // process encoding after recording
     progressInterval: 1000,   // encoding progress report interval (millisec)
     bufferSize: undefined,    // buffer size (use browser default)
@@ -176,7 +176,7 @@ const audioCapture = (timeLimit, muteTab, format, quality, limitRemoved) => {
     let mediaRecorder = new Recorder(source); //initiates the recorder based on the current stream
     mediaRecorder.setEncoding(format); //sets encoding based on options
     if(limitRemoved) { //removes time limit
-      mediaRecorder.setOptions({timeLimit: 10800});
+      mediaRecorder.setOptions({timeLimit: 1800});
     } else {
       mediaRecorder.setOptions({timeLimit: timeLimit/1000});
     }
@@ -289,15 +289,15 @@ const startCapture = function() {
       if(!sessionStorage.getItem(tabs[0].id)) {
         sessionStorage.setItem(tabs[0].id, Date.now());
         chrome.storage.sync.get({
-          maxTime: 1200000,
+          maxTime: 1800000,
           muteTab: false,
           format: "mp3",
           quality: 192,
           limitRemoved: false
         }, (options) => {
           let time = options.maxTime;
-          if(time > 1200000) {
-            time = 1200000
+          if(time > 1800000) {
+            time = 1800000
           }
           audioCapture(time, options.muteTab, options.format, options.quality, options.limitRemoved);
         });
