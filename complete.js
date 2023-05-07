@@ -40,10 +40,14 @@ document.addEventListener('DOMContentLoaded', () => {
     if(request.type === "encodingProgress" && encoding) {
       encodeProgress.style.width = `${request.progress * 100}%`;
     }
-    function generateSave(url) { //creates the save button
-      const currentDate = new Date(Date.now()).toDateString();
+    function generateSave(url, themeName) { //creates the save button
+      const currentDate = new Date(Date.now());
+      const dateString = currentDate.toISOString().slice(0,10);
+      const timeString = currentDate.toLocaleTimeString().replace(/:/g, '-');
+      const fileName = `${dateString}_${themeName}_${timeString}.${format}`;
+      
       saveButton.onclick = () => {
-        chrome.downloads.download({url: url, filename: `${currentDate}.${format}`, saveAs: true});
+        chrome.downloads.download({url: url, filename: fileName, saveAs: true});
       };
       saveButton.style.display = "inline-block";
     }
