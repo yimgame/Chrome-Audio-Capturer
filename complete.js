@@ -44,7 +44,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const currentDate = new Date(Date.now());
       const dateString = currentDate.toISOString().slice(0,10);
       const timeString = currentDate.toLocaleTimeString().replace(/:/g, '-');
-      const fileName = `${dateString}_${themeName}_${timeString}.${format}`;
+      const fileName = `${title}_${dateString}_${timeString}.${format}`;
       
       saveButton.onclick = () => {
         chrome.downloads.download({url: url, filename: fileName, saveAs: true});
